@@ -35,6 +35,12 @@ public class EnemyHPController : MonoBehaviour
             GetComponent<RectTransform>().position = new Vector3(-10, -10, -10);
         }
         GetComponent<Slider>().value = curHP / maxHP;
+
+        // Удаление объекта если не здоровья
+        if (curHP <= 0)
+        {
+            Destroy(Enemy);
+        }
     }
 
     // Получение value единиц урона
