@@ -30,11 +30,8 @@ public class InventoryManager : MonoBehaviour
     // Выбранный объект
     public GameObject ChosenObject;
 
-    // Пустое изображение для пустых ячеек иныентаря
+    // Пустое изображение для пустых ячеек инвентаря
     public Sprite blankImage;
-
-    // Камера для определения луча
-    public Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -60,11 +57,15 @@ public class InventoryManager : MonoBehaviour
     private GameObject GetHitObject()
     {
         // Сам луч
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         // Запись объекта, в который пришел луч, в переменную
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        return hit.collider.gameObject;
+        if (hit.collider != null)
+        {
+            return hit.collider.gameObject;
+        }
+        return null;
     }
 
     // Подбор предмета, если СС подошел близко и нажал F, а также если луч камеры направлен на предмет
@@ -76,7 +77,7 @@ public class InventoryManager : MonoBehaviour
 
         GameObject hitObject = GetHitObject();
 
-        if (Input.GetKeyDown(KeyCode.F) && hitObject.tag == "Item" && 
+        if (Input.GetKeyDown(KeyCode.F) && hitObject && hitObject.tag == "Item" && 
             hitObject.transform.Find("Canvas").transform.Find("Name").GetComponent<Text>().text == tempObjectName)
         {
             int i = 0;
