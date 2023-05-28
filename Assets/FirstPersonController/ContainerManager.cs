@@ -50,7 +50,7 @@ public class ContainerManager : MonoBehaviour, IPointerEnterHandler,
         if (gameObject.name.Substring(0, 4) == "Text")
         {
             int containerId = int.Parse(gameObject.name.Substring(4));
-            CharacterController.GetComponent<InventoryManager>().UseObject(containerId);
+            CharacterController.GetComponent<InventoryManager>().UseItem(containerId);
         }
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1975737311062885266}
   - component: {fileID: 2081089503834858622}
-  - component: {fileID: 2512468915852162652}
   - component: {fileID: 2081089503834858620}
   m_Layer: 0
   m_Name: Sausage
@@ -50,19 +49,6 @@ CapsuleCollider:
   m_Height: 0.3
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0.005}
---- !u!65 &2512468915852162652
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162186201274505512}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2081089503834858620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -145,7 +131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bcab5db271397c448878dae27188f1cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df2eb1c5b178e2f4d944cb625e63aedc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

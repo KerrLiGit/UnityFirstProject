@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
-    // Объект, содержащий все панели польховательского интерфейса
+    // Объект, содержащий все панели пользовательского интерфейса
     private Canvas UserCanvas;
 
     // Панель меню
@@ -45,12 +45,28 @@ public class CanvasController : MonoBehaviour
             GameMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Inventory.SetActive(false);
+
+            // Полосы здоровья противников
+            GameObject[] enemies;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(false);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && GameMenu.activeSelf)
         {
             UserInterface.SetActive(true);
             GameMenu.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+
+            // Полосы здоровья противников
+            GameObject[] enemies;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(true);
+            }
         }
 
         // При нажатии I открывать и закрывать инвентарь
@@ -58,11 +74,27 @@ public class CanvasController : MonoBehaviour
         {
             Inventory.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+
+            // Полосы здоровья противников
+            GameObject[] enemies;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(false);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.I) && !GameMenu.activeSelf && Inventory.activeSelf)
         {
             Inventory.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+
+            // Полосы здоровья противников
+            GameObject[] enemies;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(true);
+            }
         }
     }
 

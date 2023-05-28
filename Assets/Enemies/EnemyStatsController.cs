@@ -17,13 +17,13 @@ public class EnemyStatsController : MonoBehaviour
     private Vector3 offset;
 
     // ѕеременна€, отвечающа€ за показ/скрытие полосы здоровь€ врага
-    private bool isShowHPBar;
+    public bool isShowHPBar;
 
     // Start is called before the first frame update
     void Start()
     {
         offset = new Vector3(0, 2, 0);
-        isShowHPBar = false;
+        isShowHPBar = true;
     }
 
     // Update is called once per frame
@@ -62,6 +62,13 @@ public class EnemyStatsController : MonoBehaviour
     public void showHPBar(bool value)
     {
         isShowHPBar = value;
+    }
+
+    // —осто€ние полосы здоровь€ противника (разрешено ли показывать полосу)
+    // ¬ызываетс€ из StatsController
+    public bool getShowHPBar()
+    {
+        return isShowHPBar;
     }
 
 }

@@ -52,7 +52,8 @@ public class StatsController : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             // Показ полосы здоровья противника в зависимости от расстояния
-            if (Vector3.Distance(Player.transform.position, enemy.transform.position) < enemyHPBarDistance)
+            if (Vector3.Distance(Player.transform.position, enemy.transform.position) < enemyHPBarDistance &&
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().getShowHPBar())
             {
                 enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(true);
             }
@@ -76,6 +77,33 @@ public class StatsController : MonoBehaviour
             return hit.collider.gameObject;
         }
         return null;
+    }
+
+    // Изменение значения текущего НР
+    // Получение урона, лечение
+    public void changeCurHP(float value)
+    {
+        curHP += value;
+        if (curHP < 0)
+        {
+            curHP = 0;
+        }
+        if (curHP > maxHP)
+        {
+            curHP = maxHP;
+        }
+    }
+
+    // Получить урон дальнобойного оружия
+    public float getGunDamage()
+    {
+        return shootDamage;
+    }
+
+    // Экипировать оружие с уроном damage
+    public void equipGun(float damage)
+    {
+        shootDamage = damage;
     }
 
 }
