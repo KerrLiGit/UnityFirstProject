@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7811338026391030689}
   - component: {fileID: 741904624702198872}
-  - component: {fileID: 1998749779573471296}
+  - component: {fileID: 845524385812792654}
   m_Layer: 0
   m_Name: HPBarEnemy
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1998749779573471296
+--- !u!114 &845524385812792654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

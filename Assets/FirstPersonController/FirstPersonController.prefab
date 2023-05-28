@@ -6386,7 +6386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8071052553847167452}
   - component: {fileID: 4602333568193303418}
-  - component: {fileID: 6246035028385452331}
+  - component: {fileID: 5664071353271639437}
   m_Layer: 0
   m_Name: HPBar
   m_TagString: Untagged
@@ -6468,7 +6468,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6246035028385452331
+--- !u!114 &5664071353271639437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6480,6 +6480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99d40d62a064944081a0cf2c0e8340b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 4519057715010223750}
   maxHP: 100
   curHP: 100
   shootDamage: 40

@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class StatsController : MonoBehaviour
 {
+    // Объект игрока
+    public GameObject Player;
+
     // Здоровье
     public float maxHP = 100;
 
@@ -17,6 +20,8 @@ public class StatsController : MonoBehaviour
 
     // Дамаг при стрельбе
     public float shootDamage = 40;
+
+    public float enemyHPBarDistance = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +35,30 @@ public class StatsController : MonoBehaviour
         // Вычисление текущего значения HP для отображения в интерфейсе 
         HPBar.value = curHP / maxHP;
 
+        // Получение объекта противника
+        GameObject Enemy = GetHitObject();
+
         // Стрельба по клику мыши
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject Enemy = GetHitObject();
             if (Enemy != null && Enemy.tag == "Enemy")
             {
-                Enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyHPController>().getDamage(shootDamage);
+                Enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().getDamage(shootDamage);
+            }
+        }
+
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            // Показ полосы здоровья противника в зависимости от расстояния
+            if (Vector3.Distance(Player.transform.position, enemy.transform.position) < enemyHPBarDistance)
+            {
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(true);
+            }
+            else
+            {
+                enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(false);
             }
         }
     }
