@@ -30,8 +30,8 @@ public class StatsController : MonoBehaviour
         // Вычисление текущего значения HP для отображения в интерфейсе 
         HPBar.value = curHP / maxHP;
 
-        // Попадание во врага
-        if (Input.GetKeyDown(KeyCode.E))
+        // Стрельба по клику мыши
+        if (Input.GetMouseButtonDown(0))
         {
             GameObject Enemy = GetHitObject();
             if (Enemy != null && Enemy.tag == "Enemy")
