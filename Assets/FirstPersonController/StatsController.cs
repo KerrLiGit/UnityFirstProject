@@ -19,14 +19,24 @@ public class StatsController : MonoBehaviour
     private Slider HPBar;
 
     // Дамаг при стрельбе
-    public float shootDamage = 40;
+    public float shootDamage = 0;
 
-    public float enemyHPBarDistance = 30;
+    // Дамаг в ближнем бою
+    public float meleeDamage = 5;
+
+    // Дистанция дамага в ближнем бою
+    private float meleeDamageDistance = 3;
+
+    private float enemyHPBarDistance = 30;
+
+    // Задержка времени перед ударом противника
+    private float delta;
 
     // Start is called before the first frame update
     void Start()
     {
         HPBar = GetComponent<Slider>();
+        delta = 2f;
     }
 
     // Update is called once per frame
@@ -38,12 +48,20 @@ public class StatsController : MonoBehaviour
         // Получение объекта противника
         GameObject Enemy = GetHitObject();
 
-        // Стрельба по клику мыши
+        // Атака по клику мыши
         if (Input.GetMouseButtonDown(0))
         {
             if (Enemy != null && Enemy.tag == "Enemy")
             {
-                Enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().getDamage(shootDamage);
+                if (shootDamage < meleeDamage &&
+                    Vector3.Distance(Player.transform.position, Enemy.transform.position) < meleeDamageDistance)
+                {
+                    Enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().getDamage(meleeDamage);
+                }
+                else
+                {
+                    Enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().getDamage(shootDamage);
+                }
             }
         }
 
@@ -60,6 +78,21 @@ public class StatsController : MonoBehaviour
             else
             {
                 enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().showHPBar(false);
+            }
+
+            // Атака гг противниками, если расстояние слишком мало
+            if (Vector3.Distance(Player.transform.position, enemy.transform.position) < meleeDamageDistance)
+            {
+                delta -= Time.deltaTime;
+                if (delta <= 1f)
+                {
+                    enemy.transform.Find("Canvas").transform.Find("HPBarEnemy").GetComponent<EnemyStatsController>().attack();
+                }
+                if (delta <= 0)
+                {
+                    delta = 2.5f;
+                    changeCurHP(-20);
+                }
             }
         }
     }
