@@ -19,9 +19,13 @@ public class EnemyStatsController : MonoBehaviour
     // Переменная, отвечающая за показ/скрытие полосы здоровья врага
     public bool isShowHPBar;
 
+    // Объект для запуска анимаций
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = Enemy.GetComponent<Animator>();
         offset = new Vector3(0, 2, 0);
         isShowHPBar = true;
     }
@@ -43,10 +47,11 @@ public class EnemyStatsController : MonoBehaviour
             GetComponent<RectTransform>().position = new Vector3(-10, -10, -10);
         }
 
-        // Удаление противника если нет здоровья
+        // Удаление противника если нет здоровья, анимация смерти
         if (curHP <= 0)
         {
-            Destroy(Enemy);
+            animator.SetTrigger("DeathTrigger");
+            Destroy(Enemy, 5);
         }
     }
 
@@ -69,6 +74,12 @@ public class EnemyStatsController : MonoBehaviour
     public bool getShowHPBar()
     {
         return isShowHPBar;
+    }
+
+    // Атака гг на value единиц урона
+    public void attack()
+    {
+        animator.SetTrigger("AttackTrigger");
     }
 
 }
